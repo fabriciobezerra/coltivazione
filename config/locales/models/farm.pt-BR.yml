@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      farm: 'Fazenda'
+    attributes:
+      farm:
+        name: 'Nome'
+        address: 'Endereço'
+        size: 'Tamanho (em km²)'
+        latitude: 'Latitude'
+        longitude: 'Longitude'

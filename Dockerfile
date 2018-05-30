@@ -27,4 +27,7 @@ RUN gem install bundler
 RUN bundle install
 RUN gem install bundler-audit
 
+RUN gem install overcommit
+RUN overcommit --install
+
 ADD . /coltivazione
