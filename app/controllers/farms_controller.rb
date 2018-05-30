@@ -8,9 +8,12 @@ class FarmsController < ApplicationController
   end
 
   def create
-    farm = Farm.create(farm_params)
-
-    redirect_to farm
+    @farm = Farm.new(farm_params)
+    if @farm.save
+      redirect_to farm
+    else
+      render :new
+    end
   end
 
   private
