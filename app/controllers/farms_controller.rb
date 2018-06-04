@@ -10,7 +10,7 @@ class FarmsController < ApplicationController
   def create
     @farm = Farm.new(farm_params)
     if @farm.save
-      redirect_to farm
+      redirect_to @farm
     else
       render :new
     end
