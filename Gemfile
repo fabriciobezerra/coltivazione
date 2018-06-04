@@ -10,6 +10,7 @@ gem 'bootstrap', '~> 4.1.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
 gem 'font-awesome-rails'
+gem 'geokit-rails'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 gem 'pg', '>= 0.18', '< 2.0'
@@ -40,6 +41,7 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'codeclimate-test-reporter', require: false
   gem 'fuubar'
   gem 'simplecov', require: false
 end
