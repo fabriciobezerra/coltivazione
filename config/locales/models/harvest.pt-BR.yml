@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      harvest: 'Safra'
+    attributes:
+      harvest:
+        seed: 'Semente'
+        initial_date: 'Data de Inicio'
+        end_date_prediction: 'Data de Previsão de Fim'
+        employee: 'Funcionario Responsavel'

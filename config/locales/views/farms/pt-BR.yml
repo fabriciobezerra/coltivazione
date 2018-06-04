@@ -1,0 +1,6 @@
+pt-BR:
+  farms:
+    show:
+      register_harvest: 'Cadastrar safra'
+    new:
+      creating_farm: 'Cadastrando fazenda'

@@ -1,0 +1,7 @@
+<%= simple_form_for [@farm, @harvest] do |f| %>
+  <%= f.input :seed %>
+  <%= f.input :initial_date, as: :date, html5: true %>
+  <%= f.input :end_date_prediction, as: :date, html5: true %>
+  <%= f.input :employee %>
+  <%= f.button :submit %>
+<% end %>
