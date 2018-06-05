@@ -10,3 +10,5 @@
   <dt><%= Farm.human_attribute_name(:longitude) %></dt>
   <dd><%= @farm.longitude %></dd>
 </dd>
+
+<%= link_to t('.register_harvest'), new_farm_harvest_path(@farm), class: 'btn btn-primary' %>
