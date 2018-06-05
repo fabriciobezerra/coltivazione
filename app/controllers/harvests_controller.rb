@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HarvestsController < ApplicationController
   def show
     @harvest = Harvest.find(params[:id])
@@ -9,9 +11,13 @@ class HarvestsController < ApplicationController
   end
 
   def create
-    farm = Farm.find(params[:farm_id])
-    harvest = farm.harvests.create(harvest_params)
-    redirect_to farm_harvest_path(farm, harvest)
+    @farm = Farm.find(params[:farm_id])
+    @harvest = @farm.harvests.new(harvest_params)
+    if @harvest.save
+      redirect_to farm_harvest_path(@farm, @harvest)
+    else
+      render :new
+    end
   end
 
   private

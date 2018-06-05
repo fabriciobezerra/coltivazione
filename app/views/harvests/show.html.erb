@@ -1,1 +1,12 @@
-<h1>Safra de Soja #1</h1>
+<h1><%= generate_harvest_title(@harvest) %></h1>
+
+<dl>
+  <dt><%= Harvest.human_attribute_name(:seed) %><dt>
+  <dd><%= @harvest.seed %></dd>
+  <dt><%= Harvest.human_attribute_name(:initial_date) %><dt>
+  <dd><%= l @harvest.initial_date %></dd>
+  <dt><%= Harvest.human_attribute_name(:end_date_prediction) %><dt>
+  <dd><%= l @harvest.end_date_prediction %></dd>
+  <dt><%= Harvest.human_attribute_name(:employee) %><dt>
+  <dd><%= @harvest.employee %></dd>
+</dl>

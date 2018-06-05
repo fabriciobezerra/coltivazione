@@ -5,6 +5,7 @@ pt-BR:
     attributes:
       harvest:
         seed: 'Semente'
-        initial_date: 'Data de Inicio'
-        end_date_prediction: 'Data de Previsão de Fim'
+        initial_date: 'Data do Plantio'
+        end_date_prediction: 'Data de Previsão de Colheita'
         employee: 'Funcionario Responsavel'
+        harvest_number: 'Safra de %{seed} #%{number}'

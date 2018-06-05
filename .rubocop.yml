@@ -4,10 +4,6 @@ Rails:
   Enabled: true
 
 AllCops:
-  Include:
-    - '**/Rakefile'
-    - '**/Gemfile'
-    - '**/config.ru'
   Exclude:
     - 'db/**/*'
     - 'Rakefile'
