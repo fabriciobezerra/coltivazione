@@ -8,65 +8,22 @@ RSpec.describe Farm, type: :model do
   let(:size) { 400 }
   let(:latitude) { 32.54545 }
   let(:longitude) { 45.42435 }
+
   subject do
     build(:farm, name: name, address: address, size: size,
                  latitude: latitude, longitude: longitude)
   end
 
-  describe 'Validações' do
-    context 'Nome' do
-      context 'Presença' do
-        let(:name) { nil }
+  describe 'validações' do
+    it { should belong_to(:user) }
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:size) }
+    it { should validate_presence_of(:address) }
+    it { should validate_presence_of(:latitude) }
+    it { should validate_presence_of(:longitude) }
 
-        it 'must be present' do
-          expect(subject).not_to be_valid
-          expect(subject.errors).to be_added(:name, :blank)
-        end
-      end
-    end
-
-    context 'Endereço' do
-      context 'Presença' do
-        let(:address) { nil }
-
-        it 'must be present' do
-          expect(subject).not_to be_valid
-          expect(subject.errors).to be_added(:address, :blank)
-        end
-      end
-    end
-
-    context 'Tamanho' do
-      context 'Presença' do
-        let(:size) { nil }
-
-        it 'must be present' do
-          expect(subject).not_to be_valid
-          expect(subject.errors).to be_added(:size, :blank)
-        end
-      end
-    end
-
-    context 'Latitude' do
-      context 'Presença' do
-        let(:latitude) { nil }
-
-        it 'must be present' do
-          expect(subject).not_to be_valid
-          expect(subject.errors).to be_added(:latitude, :blank)
-        end
-      end
-    end
-
-    context 'Tamanho' do
-      context 'Longitude' do
-        let(:longitude) { nil }
-
-        it 'must be present' do
-          expect(subject).not_to be_valid
-          expect(subject.errors).to be_added(:longitude, :blank)
-        end
-      end
+    it 'deve ser valido com atributos validos' do
+      expect(subject).to be_valid
     end
   end
 end

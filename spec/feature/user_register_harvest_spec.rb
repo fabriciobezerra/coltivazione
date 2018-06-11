@@ -3,9 +3,12 @@
 require 'rails_helper'
 
 feature 'Usuario registra uma safra' do
-  let(:farm) { create(:farm) }
+  let(:farm) { create(:farm, user: user) }
+  let(:user) { create(:user) }
 
   scenario 'com sucesso' do
+    sign_in user
+
     visit farm_path(farm)
     click_on 'Cadastrar safra'
 
@@ -27,6 +30,8 @@ feature 'Usuario registra uma safra' do
   end
 
   scenario 'deve falhar se não preencher os campos obrigatórios' do
+    sign_in user
+
     visit farm_path(farm)
     click_on 'Cadastrar safra'
 
@@ -42,5 +47,15 @@ feature 'Usuario registra uma safra' do
       .to have_content('Data de Previsão de Colheita não pode ficar em branco')
     expect(page)
       .to have_content('Funcionario Responsavel não pode ficar em branco')
+  end
+
+  context 'usuario deve estar logado' do
+    scenario 'para ver uma safra' do
+      harvest = create(:harvest, farm: farm)
+
+      visit farm_harvest_path(farm, harvest)
+
+      expect(current_path).to eq new_user_session_path
+    end
   end
 end

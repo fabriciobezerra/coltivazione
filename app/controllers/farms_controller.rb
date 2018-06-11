@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class FarmsController < ApplicationController
+  before_action :authenticate_user!
+
   def show
     @farm = Farm.find(params[:id])
   end
@@ -11,6 +13,7 @@ class FarmsController < ApplicationController
 
   def create
     @farm = Farm.new(farm_params)
+    @farm.user = current_user
     if @farm.save
       redirect_to @farm
     else

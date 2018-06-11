@@ -5,6 +5,7 @@ class Harvest < ApplicationRecord
             :end_date_prediction, :employee, presence: true
 
   belongs_to :farm
+  belongs_to :user
 
   scope :older, lambda { |harvest|
     where(seed: harvest.seed)

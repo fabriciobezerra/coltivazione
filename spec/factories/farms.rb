@@ -7,5 +7,6 @@ FactoryBot.define do
     size '400'
     latitude 32.3454
     longitude 96.5453
+    user
   end
 end
