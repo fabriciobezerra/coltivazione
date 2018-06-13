@@ -8,7 +8,7 @@ RSpec.describe Harvest, type: :model do
   let(:seed) { 'Soja' }
   let(:initial_date) { 3.days.from_now }
   let(:end_date_prediction) { 2.months.from_now }
-  let(:employee) { 'José' }
+  let(:employee) { 'Julian' }
 
   subject do
     build(:harvest, farm: farm, seed: seed, initial_date: initial_date,

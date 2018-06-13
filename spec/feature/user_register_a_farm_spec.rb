@@ -57,12 +57,30 @@ feature 'Usuario registra uma fazenda' do
       expect(current_path).to eq new_user_session_path
     end
 
-    scenario 'para ver uma fazenda' do
-      farm = create(:farm)
+    context 'para ver uma fazenda' do
+      scenario 'com sucesso' do
+        farm = create(:farm)
 
-      visit farm_path(farm)
+        visit farm_path(farm)
 
-      expect(current_path).to eq new_user_session_path
+        expect(current_path).to eq new_user_session_path
+      end
+
+      scenario 'deve ser dono da fazenda' do
+        owner = create(:user)
+        user = create(:user)
+        farm = create(:farm, user: owner)
+
+        sign_in user
+
+        visit farm_path(farm)
+
+        expect(current_path).to eq root_path
+        expect(page).to have_css(
+          '.alert.alert-danger',
+          text: 'Permissão para ver a fazenda recusada'
+        )
+      end
     end
   end
 end

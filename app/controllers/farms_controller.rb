@@ -2,10 +2,10 @@
 
 class FarmsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_farm, only: [:show]
+  before_action :validate_user, only: [:show]
 
-  def show
-    @farm = Farm.find(params[:id])
-  end
+  def show; end
 
   def new
     @farm = Farm.new
@@ -23,7 +23,17 @@ class FarmsController < ApplicationController
 
   private
 
+  def set_farm
+    @farm = Farm.find(params[:id])
+  end
+
   def farm_params
     params.require(:farm).permit(:name, :address, :size, :latitude, :longitude)
+  end
+
+  def validate_user
+    return if @farm.user == current_user
+    flash[:alert] = 'Permissão para ver a fazenda recusada'
+    redirect_to root_path
   end
 end
