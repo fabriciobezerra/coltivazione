@@ -78,7 +78,7 @@ feature 'Usuario registra uma fazenda' do
         expect(current_path).to eq root_path
         expect(page).to have_css(
           '.alert.alert-danger',
-          text: 'Permissão para ver a fazenda recusada'
+          text: 'Permissão para ver a Fazenda recusada'
         )
       end
     end

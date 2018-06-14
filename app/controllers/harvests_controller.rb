@@ -2,10 +2,10 @@
 
 class HarvestsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_harvest, only: [:show]
+  before_action -> { validate_user(@harvest) }, only: [:show]
 
-  def show
-    @harvest = Harvest.find(params[:id])
-  end
+  def show; end
 
   def new
     @farm = Farm.find(params[:farm_id])
@@ -24,6 +24,10 @@ class HarvestsController < ApplicationController
   end
 
   private
+
+  def set_harvest
+    @harvest = Harvest.find(params[:id])
+  end
 
   def harvest_params
     params.require(:harvest).permit(:seed, :initial_date, :end_date_prediction,

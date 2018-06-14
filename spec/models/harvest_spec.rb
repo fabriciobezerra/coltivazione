@@ -16,9 +16,10 @@ RSpec.describe Harvest, type: :model do
                     employee: employee)
   end
 
+  it { should belong_to(:user) }
+  it { should belong_to(:farm) }
+
   describe 'validações' do
-    it { should belong_to(:user) }
-    it { should belong_to(:farm) }
     it { should validate_presence_of(:seed) }
     it { should validate_presence_of(:initial_date) }
     it { should validate_presence_of(:end_date_prediction) }

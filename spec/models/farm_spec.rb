@@ -14,8 +14,10 @@ RSpec.describe Farm, type: :model do
                  latitude: latitude, longitude: longitude)
   end
 
+  it { should belong_to(:user) }
+  it { should have_many(:harvests) }
+
   describe 'validações' do
-    it { should belong_to(:user) }
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:size) }
     it { should validate_presence_of(:address) }
