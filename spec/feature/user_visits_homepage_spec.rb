@@ -8,4 +8,14 @@ feature 'Usuário visita a pagina inicial' do
 
     expect(page).to have_css('h1', text: 'Coltivazione')
   end
+
+  scenario 'Usuarios logados não veem link de login' do
+    user = create(:user)
+
+    sign_in user
+
+    visit root_path
+
+    expect(page).not_to have_content('Log in')
+  end
 end

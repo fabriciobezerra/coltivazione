@@ -2,9 +2,11 @@
 
 FactoryBot.define do
   factory :harvest do
-    seed 'MyString'
-    initial_date '2018-06-04'
-    end_date_prediction '2018-06-04'
-    employee 'MyString'
+    seed 'Soja'
+    initial_date 3.days.from_now
+    end_date_prediction 6.months.from_now
+    employee 'José'
+    farm
+    user { farm.user }
   end
 end

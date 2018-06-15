@@ -3,7 +3,11 @@
 require 'rails_helper'
 
 feature 'Usuario registra uma fazenda' do
+  let(:user) { create(:user) }
+
   scenario 'com sucesso' do
+    sign_in user
+
     visit root_path
     click_on 'Cadastrar fazenda'
 
@@ -26,6 +30,8 @@ feature 'Usuario registra uma fazenda' do
   end
 
   scenario 'deve falhar se não preencher campos obrigatórios' do
+    sign_in user
+
     visit root_path
     click_on 'Cadastrar fazenda'
 
@@ -41,5 +47,40 @@ feature 'Usuario registra uma fazenda' do
     expect(page).to have_content('Tamanho (em km²) não pode ficar em branco')
     expect(page).to have_content('Latitude não pode ficar em branco')
     expect(page).to have_content('Longitude não pode ficar em branco')
+  end
+
+  context 'usuario deve estar logado' do
+    scenario 'para cadastrar uma fazenda' do
+      visit root_path
+      click_on 'Cadastrar fazenda'
+
+      expect(current_path).to eq new_user_session_path
+    end
+
+    context 'para ver uma fazenda' do
+      scenario 'com sucesso' do
+        farm = create(:farm)
+
+        visit farm_path(farm)
+
+        expect(current_path).to eq new_user_session_path
+      end
+
+      scenario 'deve ser dono da fazenda' do
+        owner = create(:user)
+        user = create(:user)
+        farm = create(:farm, user: owner)
+
+        sign_in user
+
+        visit farm_path(farm)
+
+        expect(current_path).to eq root_path
+        expect(page).to have_css(
+          '.alert.alert-danger',
+          text: 'Permissão para ver a Fazenda recusada'
+        )
+      end
+    end
   end
 end

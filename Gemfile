@@ -9,6 +9,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 4.1.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
+gem 'devise-i18n'
+gem 'ffaker'
 gem 'font-awesome-rails'
 gem 'geokit-rails'
 gem 'jbuilder', '~> 2.5'
@@ -43,6 +45,7 @@ group :test do
   gem 'capybara'
   gem 'codeclimate-test-reporter', require: false
   gem 'fuubar'
+  gem 'shoulda-matchers', '~> 3.1'
   gem 'simplecov', require: false
 end
 

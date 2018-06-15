@@ -1,0 +1,3 @@
+pt-BR:
+  alerts:
+    user_denied: 'Permissão para ver a %{page} recusada'
