@@ -27,6 +27,89 @@ feature 'Usuario registra uma safra' do
     expect(page).to have_css('dd', text: I18n.l(Time.zone.today))
     expect(page).to have_css('dt', text: 'Funcionario Responsavel')
     expect(page).to have_css('dd', text: 'José')
+    expect(page).to have_css('dt', text: 'Fazenda')
+    expect(page).to have_css('dd', text: farm.name)
+    expect(page).to have_css('dt', text: 'Status')
+    expect(page).to have_css('dd', text: 'Ativo')
+  end
+
+  context 'que aparece na pagina da fazenda' do
+    scenario 'com sucesso' do
+      sign_in user
+
+      visit farm_path(farm)
+      click_on 'Cadastrar safra'
+
+      fill_in 'Semente', with: 'Soja'
+      fill_in 'Data do Plantio', with: Time.zone.today
+      fill_in 'Data de Previsão de Colheita', with: Time.zone.today
+      fill_in 'Funcionario Responsavel', with: 'José'
+      click_on 'Criar Safra'
+
+      visit farm_path(farm)
+
+      expect(page).to have_css('h1', text: 'Safra de Soja #1')
+      expect(page).to have_css('dt', text: 'Semente')
+      expect(page).to have_css('dd', text: 'Soja')
+      expect(page).to have_css('dt', text: 'Data do Plantio')
+      expect(page).to have_css('dd', text: I18n.l(Time.zone.today))
+      expect(page).to have_css('dt', text: 'Data de Previsão de Colheita')
+      expect(page).to have_css('dd', text: I18n.l(Time.zone.today))
+      expect(page).to have_css('dt', text: 'Funcionario Responsavel')
+      expect(page).to have_css('dd', text: 'José')
+    end
+
+    scenario 'remove botão de cadastrar safra' do
+      sign_in user
+
+      visit farm_path(farm)
+      click_on 'Cadastrar safra'
+
+      fill_in 'Semente', with: 'Soja'
+      fill_in 'Data do Plantio', with: Time.zone.today
+      fill_in 'Data de Previsão de Colheita', with: Time.zone.today
+      fill_in 'Funcionario Responsavel', with: 'José'
+      click_on 'Criar Safra'
+
+      visit farm_path(farm)
+
+      expect(page).not_to have_content('Cadastrar safra')
+    end
+
+    scenario 'acessa a safra via pagina da fazenda' do
+      sign_in user
+
+      visit farm_path(farm)
+      click_on 'Cadastrar safra'
+
+      fill_in 'Semente', with: 'Soja'
+      fill_in 'Data do Plantio', with: Time.zone.today
+      fill_in 'Data de Previsão de Colheita', with: Time.zone.today
+      fill_in 'Funcionario Responsavel', with: 'José'
+      click_on 'Criar Safra'
+
+      visit farm_path(farm)
+      click_on 'Safra de Soja #1'
+
+      expect(current_path).to eq(farm_harvest_path(farm, farm.active_harvest))
+    end
+  end
+
+  scenario 'acessa a fazenda via pagina de safra' do
+    sign_in user
+
+    visit farm_path(farm)
+    click_on 'Cadastrar safra'
+
+    fill_in 'Semente', with: 'Soja'
+    fill_in 'Data do Plantio', with: Time.zone.today
+    fill_in 'Data de Previsão de Colheita', with: Time.zone.today
+    fill_in 'Funcionario Responsavel', with: 'José'
+    click_on 'Criar Safra'
+
+    click_on farm.name
+
+    expect(current_path).to eq(farm_path(farm))
   end
 
   scenario 'deve falhar se não preencher os campos obrigatórios' do

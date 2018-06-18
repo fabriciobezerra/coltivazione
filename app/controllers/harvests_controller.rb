@@ -31,6 +31,6 @@ class HarvestsController < ApplicationController
 
   def harvest_params
     params.require(:harvest).permit(:seed, :initial_date, :end_date_prediction,
-                                    :employee)
+                                    :employee, :state)
   end
 end

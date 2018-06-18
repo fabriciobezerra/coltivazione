@@ -9,3 +9,9 @@ pt-BR:
         end_date_prediction: 'Data de Previsão de Colheita'
         employee: 'Funcionario Responsavel'
         harvest_number: 'Safra de %{seed} #%{number}'
+        farm: 'Fazenda'
+        state: 'Status'
+        states:
+          active: 'Ativo'
+          cancelled: 'Cancelado'
+          ended: 'Encerrada'

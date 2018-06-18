@@ -1,0 +1,16 @@
+<h1><%= link_to generate_harvest_title(harvest), farm_harvest_path(harvest.farm, harvest) %></h1>
+
+<dl>
+  <dt><%= Harvest.human_attribute_name(:seed) %><dt>
+  <dd><%= harvest.seed %></dd>
+  <dt><%= Harvest.human_attribute_name(:initial_date) %><dt>
+  <dd><%= l harvest.initial_date %></dd>
+  <dt><%= Harvest.human_attribute_name(:end_date_prediction) %><dt>
+  <dd><%= l harvest.end_date_prediction %></dd>
+  <dt><%= Harvest.human_attribute_name(:employee) %></dt>
+  <dd><%= harvest.employee %></dd>
+  <dt><%= Harvest.human_attribute_name(:farm) %></dt>
+  <dd><%= link_to harvest.farm.name, farm_path(harvest.farm) %></dd>
+  <dt><%= Harvest.human_attribute_name(:state) %></dt>
+  <dd><%= Harvest.human_enum_name(:state, harvest.state.to_sym) %></dd>
+</dl>
