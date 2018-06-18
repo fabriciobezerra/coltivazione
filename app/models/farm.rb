@@ -6,4 +6,8 @@ class Farm < ApplicationRecord
   belongs_to :user
 
   validates :name, :address, :size, :latitude, :longitude, presence: true
+
+  def active_harvest
+    harvests.where(state: 'active').last
+  end
 end

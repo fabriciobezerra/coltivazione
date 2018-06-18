@@ -8,5 +8,6 @@ FactoryBot.define do
     employee 'José'
     farm
     user { farm.user }
+    state 'active'
   end
 end
