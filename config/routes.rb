@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :farms, only: %w[show new create] do
-    resources :harvests, only: %w[show new create]
+  resources :farms, only: %w[index show new create] do
+    resources :harvests, only: %w[index show new create]
   end
 end

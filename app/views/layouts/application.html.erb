@@ -19,7 +19,9 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <% unless user_signed_in? %>
+          <% if user_signed_in? %>
+            <%= link_to Farm.model_name.human.pluralize, farms_path %>
+          <% else %>
             <li class="nav-item active">
               <%= link_to 'Log in', new_user_session_path, class: 'nav-link' %>
             </li>

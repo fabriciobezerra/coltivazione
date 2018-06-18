@@ -2,13 +2,17 @@
 
 class HarvestsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_farm, only: %i[index new create]
   before_action :set_harvest, only: [:show]
   before_action -> { validate_user(@harvest) }, only: [:show]
+
+  def index
+    @harvests = @farm.harvests
+  end
 
   def show; end
 
   def new
-    @farm = Farm.find(params[:farm_id])
     @harvest = Harvest.new
   end
 
@@ -27,6 +31,10 @@ class HarvestsController < ApplicationController
 
   def set_harvest
     @harvest = Harvest.find(params[:id])
+  end
+
+  def set_farm
+    @farm = Farm.find(params[:farm_id])
   end
 
   def harvest_params

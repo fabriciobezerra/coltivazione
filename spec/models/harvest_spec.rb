@@ -28,5 +28,12 @@ RSpec.describe Harvest, type: :model do
     it 'deve ser valido com atributos validos' do
       expect(subject).to be_valid
     end
+
+    it 'não deve haver duas safras ativas por fazenda' do
+      create(:harvest, farm: farm, user: user)
+
+      expect(subject).not_to be_valid
+      expect(subject.errors).to be_added(:seed, :has_other_active_farm)
+    end
   end
 end
