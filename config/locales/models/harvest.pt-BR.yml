@@ -15,3 +15,9 @@ pt-BR:
           active: 'Ativo'
           cancelled: 'Cancelado'
           ended: 'Encerrada'
+    errors:
+      models:
+        harvest:
+          attributes:
+            seed:
+              has_other_active_farm: 'Já existe outra safra ativa'

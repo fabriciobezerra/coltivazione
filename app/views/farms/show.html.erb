@@ -12,9 +12,10 @@
       <dd><%= @farm.latitude %></dd>
       <dt><%= Farm.human_attribute_name(:longitude) %></dt>
       <dd><%= @farm.longitude %></dd>
-      </dd>
+    </dl>
 
-      <%= link_to t('.register_harvest'), new_farm_harvest_path(@farm), class: 'btn btn-primary' unless @farm.active_harvest.present? %>
+    <%= link_to t('.register_harvest'), new_farm_harvest_path(@farm), class: 'btn btn-success' unless @farm.active_harvest.present? %>
+    <%= link_to t('.all_harvests'), farm_harvests_path(@farm), class: 'btn btn-info' %>
   </div>
 
   <div class="col">

@@ -5,7 +5,7 @@ FactoryBot.define do
     seed 'Soja'
     initial_date 3.days.from_now
     end_date_prediction 6.months.from_now
-    employee 'José'
+    employee FFaker::NameBR.unique.first_name
     farm
     user { farm.user }
     state 'active'

@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :farm do
-    name 'Santiago'
-    address 'Rodovia Km 21'
+    name FFaker::NameBR.unique.first_name
+    address FFaker::AddressBR.unique.full_address
     size '400'
     latitude 32.3454
     longitude 96.5453

@@ -7,6 +7,10 @@ class FarmsController < ApplicationController
 
   def show; end
 
+  def index
+    @farms = current_user.farms
+  end
+
   def new
     @farm = Farm.new
   end

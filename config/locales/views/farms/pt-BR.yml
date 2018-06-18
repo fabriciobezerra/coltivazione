@@ -2,5 +2,6 @@ pt-BR:
   farms:
     show:
       register_harvest: 'Cadastrar safra'
+      all_harvests: 'Todas as safras'
     new:
       creating_farm: 'Cadastrando fazenda'
