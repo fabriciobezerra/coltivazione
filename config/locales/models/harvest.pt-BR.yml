@@ -13,8 +13,10 @@ pt-BR:
         state: 'Status'
         states:
           active: 'Ativo'
-          cancelled: 'Cancelado'
+          cancelled: 'Cancelada'
           ended: 'Encerrada'
+        final_notes: 'Notas finais'
+        total_collected: 'Total arrecadado (em ton)'
     errors:
       models:
         harvest:

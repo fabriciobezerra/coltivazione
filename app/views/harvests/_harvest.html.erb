@@ -13,4 +13,14 @@
   <dd><%= link_to harvest.farm.name, farm_path(harvest.farm) %></dd>
   <dt><%= Harvest.human_attribute_name(:state) %></dt>
   <dd><%= Harvest.human_enum_name(:state, harvest.state.to_sym) %></dd>
+  <% unless harvest.active? %>
+    <dt><%= Harvest.human_attribute_name(:total_collected) %></dt>
+    <dd><%= harvest.total_collected %></dd>
+    <dt><%= Harvest.human_attribute_name(:final_notes) %></dt>
+    <dd><%= harvest.final_notes %></dd>
+  <% end %>
 </dl>
+
+<% if harvest.active? %>
+  <%= link_to t('.end_harvest'), finish_farm_harvest_path(harvest.farm, harvest), class: 'btn btn-danger' %>
+<% end %>

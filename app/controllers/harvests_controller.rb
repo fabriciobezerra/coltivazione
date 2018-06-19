@@ -2,8 +2,8 @@
 
 class HarvestsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_farm, only: %i[index new create]
-  before_action :set_harvest, only: [:show]
+  before_action :set_farm, only: %i[index new create finish finished]
+  before_action :set_harvest, only: %i[show finish finished]
   before_action -> { validate_user(@harvest) }, only: [:show]
 
   def index
@@ -27,6 +27,13 @@ class HarvestsController < ApplicationController
     end
   end
 
+  def finish; end
+
+  def finished
+    @harvest.update(harvest_update_params)
+    redirect_to farm_harvest_path(@farm, @harvest)
+  end
+
   private
 
   def set_harvest
@@ -35,6 +42,10 @@ class HarvestsController < ApplicationController
 
   def set_farm
     @farm = Farm.find(params[:farm_id])
+  end
+
+  def harvest_update_params
+    params.require(:harvest).permit(:final_notes, :state, :total_collected)
   end
 
   def harvest_params
