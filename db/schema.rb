@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_18_162805) do
+ActiveRecord::Schema.define(version: 2018_06_19_150909) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(version: 2018_06_18_162805) do
     t.bigint "farm_id"
     t.bigint "user_id"
     t.integer "state"
+    t.text "final_notes"
+    t.integer "total_collected"
     t.index ["farm_id"], name: "index_harvests_on_farm_id"
     t.index ["user_id"], name: "index_harvests_on_user_id"
   end

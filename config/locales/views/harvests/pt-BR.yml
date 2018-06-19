@@ -1,0 +1,6 @@
+pt-BR:
+  harvests:
+    harvest:
+      end_harvest: 'Encerrar safra'
+    finish:
+      finish: 'Encerrar'
