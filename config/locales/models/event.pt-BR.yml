@@ -1,0 +1,8 @@
+pt-BR:
+  activerecord:
+    models:
+      event: 'Acontecimento'
+    attributes:
+      event:
+        text: 'Acontecimento'
+        date: 'Data'

@@ -15,7 +15,6 @@ feature 'Usuario pode encerrar safra' do
     click_on farm.name
     click_on 'Encerrar safra'
 
-    save_page
     select 'Encerrada', from: 'Status'
     fill_in 'Total arrecadado (em ton)', with: '50'
     fill_in 'Notas finais', with: 'Encerrando a safra'

@@ -17,6 +17,7 @@ pt-BR:
           ended: 'Encerrada'
         final_notes: 'Notas finais'
         total_collected: 'Total arrecadado (em ton)'
+        events: 'Linha do Tempo'
     errors:
       models:
         harvest:

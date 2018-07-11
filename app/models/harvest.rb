@@ -8,6 +8,7 @@ class Harvest < ApplicationRecord
 
   belongs_to :farm
   belongs_to :user
+  has_many :events
 
   enum state: %i[active cancelled ended]
 

@@ -2,5 +2,6 @@ pt-BR:
   harvests:
     harvest:
       end_harvest: 'Encerrar safra'
+      add_event: 'Adicionar acontecimento'
     finish:
       finish: 'Encerrar'

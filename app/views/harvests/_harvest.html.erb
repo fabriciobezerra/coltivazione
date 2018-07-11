@@ -1,26 +1,54 @@
-<h1><%= link_to generate_harvest_title(harvest), farm_harvest_path(harvest.farm, harvest) %></h1>
+<h1><%= link_to generate_harvest_title(harvest), harvest_path(harvest) %></h1>
 
 <dl>
   <dt><%= Harvest.human_attribute_name(:seed) %><dt>
   <dd><%= harvest.seed %></dd>
+
   <dt><%= Harvest.human_attribute_name(:initial_date) %><dt>
   <dd><%= l harvest.initial_date %></dd>
+
   <dt><%= Harvest.human_attribute_name(:end_date_prediction) %><dt>
   <dd><%= l harvest.end_date_prediction %></dd>
+
   <dt><%= Harvest.human_attribute_name(:employee) %></dt>
   <dd><%= harvest.employee %></dd>
+
   <dt><%= Harvest.human_attribute_name(:farm) %></dt>
   <dd><%= link_to harvest.farm.name, farm_path(harvest.farm) %></dd>
+
   <dt><%= Harvest.human_attribute_name(:state) %></dt>
   <dd><%= Harvest.human_enum_name(:state, harvest.state.to_sym) %></dd>
+
+  <dt><%= Harvest.human_attribute_name(:events) %></dt>
+  <dd>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col"><%= Event.human_attribute_name(:date) %></th>
+          <th scope="col"><%= Event.human_attribute_name(:text) %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% harvest.events.each do |event| %>
+          <tr>
+            <th scope='row'><%= I18n.l(event.date) %></th>
+            <td><%= event.text %></th>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </dd>
+
   <% unless harvest.active? %>
     <dt><%= Harvest.human_attribute_name(:total_collected) %></dt>
     <dd><%= harvest.total_collected %></dd>
+
     <dt><%= Harvest.human_attribute_name(:final_notes) %></dt>
     <dd><%= harvest.final_notes %></dd>
   <% end %>
 </dl>
 
 <% if harvest.active? %>
-  <%= link_to t('.end_harvest'), finish_farm_harvest_path(harvest.farm, harvest), class: 'btn btn-danger' %>
+  <%= link_to t('.add_event'), new_harvest_event_path(harvest), class: 'btn btn-primary' %>
+  <%= link_to t('.end_harvest'), finish_harvest_path(harvest), class: 'btn btn-danger' %>
 <% end %>
