@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EventsController < ApplicationController
   def new
     @harvest = Harvest.find(params[:harvest_id])
@@ -5,8 +7,13 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.create(event_params)
-    redirect_to @event.harvest
+    @event = Event.new(event_params)
+    @harvest = Harvest.find(event_params[:harvest_id])
+    if @event.save
+      redirect_to @event.harvest
+    else
+      render :new
+    end
   end
 
   private

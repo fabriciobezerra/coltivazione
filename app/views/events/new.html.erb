@@ -1,4 +1,4 @@
-<%= simple_form_for [@harvest, @event]  do |f| %>
+<%= simple_form_for [@harvest, @event] do |f| %>
   <%= f.hidden_field :harvest_id, value: @harvest.id %>
   <%= f.hidden_field :user_id, value: current_user.id %>
   <%= f.input :text %>

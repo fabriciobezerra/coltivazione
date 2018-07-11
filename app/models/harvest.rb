@@ -4,6 +4,9 @@ class Harvest < ApplicationRecord
   validates :seed, :initial_date, :state,
             :end_date_prediction, :employee, presence: true
 
+  validates :final_notes, :state, :total_collected,
+            presence: true, unless: :new_record?
+
   validate :older_active_harvest
 
   belongs_to :farm
@@ -21,5 +24,11 @@ class Harvest < ApplicationRecord
     return unless farm.active_harvest.try(:active?) &&
                   farm.active_harvest.id != id
     errors.add(:seed, :has_other_active_farm)
+  end
+
+  private
+
+  def updating?
+    new_record?
   end
 end

@@ -26,4 +26,19 @@ feature 'Usuario adiciona acontecimento na linha do tempo da safra' do
     expect(page).to have_css('th', text: I18n.l(Time.zone.yesterday))
     expect(page).to have_css('td', text: 'Teve um bagaço muito loco')
   end
+
+  scenario 'deve preencher os campos obrigatórios' do
+    sign_in user
+
+    visit root_path
+    click_on 'Fazendas'
+    click_on farm.name
+    click_on 'Safra de Soja #1'
+    click_on 'Adicionar acontecimento'
+
+    click_on 'Criar Acontecimento'
+
+    expect(page).to have_content('Acontecimento não pode ficar em branco')
+    expect(page).to have_content('Data não pode ficar em branco')
+  end
 end

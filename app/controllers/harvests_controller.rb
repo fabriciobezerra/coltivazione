@@ -30,8 +30,11 @@ class HarvestsController < ApplicationController
   def finish; end
 
   def finished
-    @harvest.update(harvest_update_params)
-    redirect_to @harvest
+    if @harvest.update(harvest_update_params)
+      redirect_to @harvest
+    else
+      render :finish
+    end
   end
 
   private
