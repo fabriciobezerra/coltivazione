@@ -4,10 +4,14 @@ class Harvest < ApplicationRecord
   validates :seed, :initial_date, :state,
             :end_date_prediction, :employee, presence: true
 
+  validates :final_notes, :state, :total_collected,
+            presence: true, unless: :new_record?
+
   validate :older_active_harvest
 
   belongs_to :farm
   belongs_to :user
+  has_many :events, dependent: :nullify
 
   enum state: %i[active cancelled ended]
 

@@ -26,6 +26,7 @@ feature 'Usuario vê a página da fazendo com uma safra' do
   end
 
   scenario 'somente se a safra for ativa' do
+    harvest.update(final_notes: 'Cancelled', total_collected: 50)
     harvest.cancelled!
 
     sign_in user

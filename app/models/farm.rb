@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 class Farm < ApplicationRecord
-  has_many :harvests, dependent: :destroy
+  validates :name, :address, :size, :latitude, :longitude, presence: true
 
   belongs_to :user
-
-  validates :name, :address, :size, :latitude, :longitude, presence: true
+  has_many :harvests, dependent: :nullify
 
   def active_harvest
     harvests.where(state: 'active').last

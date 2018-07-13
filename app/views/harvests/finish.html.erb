@@ -1,4 +1,4 @@
-<%= simple_form_for [@farm, @harvest], method: :post, url: finished_farm_harvest_path do |f| %>
+<%= simple_form_for @harvest, method: :post, url: finished_harvest_path do |f| %>
   <%= f.input :state, collection: [[Harvest.human_enum_name(:state, :cancelled), 'cancelled'], [Harvest.human_enum_name(:state, :ended), 'ended']] %>
   <%= f.input :total_collected %>
   <%= f.input :final_notes %>

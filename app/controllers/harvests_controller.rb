@@ -2,7 +2,7 @@
 
 class HarvestsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_farm, only: %i[index new create finish finished]
+  before_action :set_farm, only: %i[index new create]
   before_action :set_harvest, only: %i[show finish finished]
   before_action -> { validate_user(@harvest) }, only: [:show]
 
@@ -21,7 +21,7 @@ class HarvestsController < ApplicationController
     @harvest = @farm.harvests.new(harvest_params)
     @harvest.user = current_user
     if @harvest.save
-      redirect_to farm_harvest_path(@farm, @harvest)
+      redirect_to @harvest
     else
       render :new
     end
@@ -30,8 +30,11 @@ class HarvestsController < ApplicationController
   def finish; end
 
   def finished
-    @harvest.update(harvest_update_params)
-    redirect_to farm_harvest_path(@farm, @harvest)
+    if @harvest.update(harvest_update_params)
+      redirect_to @harvest
+    else
+      render :finish
+    end
   end
 
   private

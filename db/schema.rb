@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_19_150909) do
+ActiveRecord::Schema.define(version: 2018_07_06_192300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "events", force: :cascade do |t|
+    t.date "date"
+    t.string "text"
+    t.bigint "harvest_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["harvest_id"], name: "index_events_on_harvest_id"
+    t.index ["user_id"], name: "index_events_on_user_id"
+  end
 
   create_table "farms", force: :cascade do |t|
     t.string "name"
@@ -60,6 +71,8 @@ ActiveRecord::Schema.define(version: 2018_06_19_150909) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "events", "harvests"
+  add_foreign_key "events", "users"
   add_foreign_key "farms", "users"
   add_foreign_key "harvests", "farms"
   add_foreign_key "harvests", "users"

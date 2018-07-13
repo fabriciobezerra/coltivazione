@@ -91,7 +91,7 @@ feature 'Usuario registra uma safra' do
       visit farm_path(farm)
       click_on 'Safra de Soja #1'
 
-      expect(current_path).to eq(farm_harvest_path(farm, farm.active_harvest))
+      expect(current_path).to eq(harvest_path(farm.active_harvest))
     end
   end
 
@@ -136,7 +136,7 @@ feature 'Usuario registra uma safra' do
     scenario 'para ver uma safra' do
       harvest = create(:harvest, farm: farm)
 
-      visit farm_harvest_path(farm, harvest)
+      visit harvest_path(harvest)
 
       expect(current_path).to eq new_user_session_path
     end
@@ -145,7 +145,7 @@ feature 'Usuario registra uma safra' do
       scenario 'com sucesso' do
         harvest = create(:harvest)
 
-        visit farm_harvest_path(harvest.farm, harvest)
+        visit harvest_path(harvest)
 
         expect(current_path).to eq new_user_session_path
       end
@@ -158,7 +158,7 @@ feature 'Usuario registra uma safra' do
 
         sign_in user
 
-        visit farm_harvest_path(farm, harvest)
+        visit harvest_path(harvest)
 
         expect(current_path).to eq root_path
         expect(page).to have_css(

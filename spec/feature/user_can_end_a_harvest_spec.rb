@@ -15,7 +15,6 @@ feature 'Usuario pode encerrar safra' do
     click_on farm.name
     click_on 'Encerrar safra'
 
-    save_page
     select 'Encerrada', from: 'Status'
     fill_in 'Total arrecadado (em ton)', with: '50'
     fill_in 'Notas finais', with: 'Encerrando a safra'
@@ -46,5 +45,20 @@ feature 'Usuario pode encerrar safra' do
     expect(page).to have_css('dd', text: '0')
     expect(page).to have_css('dt', text: 'Notas finais')
     expect(page).to have_css('dd', text: 'Geada acabou com tudo')
+  end
+
+  scenario 'cancelando a safra' do
+    sign_in user
+
+    visit root_path
+    click_on 'Fazendas'
+    click_on farm.name
+    click_on 'Encerrar safra'
+
+    click_on 'Encerrar'
+
+    expect(page)
+      .to have_content('Total arrecadado (em ton) não pode ficar em branco')
+    expect(page).to have_content('Notas finais não pode ficar em branco')
   end
 end
