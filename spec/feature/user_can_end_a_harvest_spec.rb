@@ -46,7 +46,7 @@ feature 'Usuario pode encerrar safra' do
     expect(page).to have_css('dt', text: 'Notas finais')
     expect(page).to have_css('dd', text: 'Geada acabou com tudo')
   end
-  j
+
   scenario 'cancelando a safra' do
     sign_in user
 
@@ -57,7 +57,8 @@ feature 'Usuario pode encerrar safra' do
 
     click_on 'Encerrar'
 
-    expect(page).to have_content('Total arrecadado (em ton) não pode ficar em branco')
+    expect(page)
+      .to have_content('Total arrecadado (em ton) não pode ficar em branco')
     expect(page).to have_content('Notas finais não pode ficar em branco')
   end
 end

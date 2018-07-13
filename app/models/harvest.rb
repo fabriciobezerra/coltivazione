@@ -11,7 +11,7 @@ class Harvest < ApplicationRecord
 
   belongs_to :farm
   belongs_to :user
-  has_many :events
+  has_many :events, dependent: :nullify
 
   enum state: %i[active cancelled ended]
 
@@ -24,11 +24,5 @@ class Harvest < ApplicationRecord
     return unless farm.active_harvest.try(:active?) &&
                   farm.active_harvest.id != id
     errors.add(:seed, :has_other_active_farm)
-  end
-
-  private
-
-  def updating?
-    new_record?
   end
 end
