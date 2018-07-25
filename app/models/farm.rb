@@ -7,6 +7,6 @@ class Farm < ApplicationRecord
   has_many :harvests, dependent: :nullify
 
   def active_harvest
-    harvests.where(state: 'active').last
+    harvests.where(state: 'active').last.try(:decorate)
   end
 end

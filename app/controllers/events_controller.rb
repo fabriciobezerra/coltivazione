@@ -1,16 +1,18 @@
 # frozen_string_literal: true
 
 class EventsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_harvest, only: %i[new create]
+
   def new
-    @harvest = Harvest.find(params[:harvest_id])
     @event = Event.new
   end
 
   def create
-    @event = Event.new(event_params)
-    @harvest = Harvest.find(event_params[:harvest_id])
+    @event = @harvest.events.new(event_params)
+    @event.user = current_user
     if @event.save
-      redirect_to @event.harvest
+      redirect_to harvest_path(@event.harvest)
     else
       render :new
     end
@@ -18,7 +20,11 @@ class EventsController < ApplicationController
 
   private
 
+  def set_harvest
+    @harvest = Harvest.find(params[:harvest_id])
+  end
+
   def event_params
-    params.require(:event).permit(:harvest_id, :user_id, :text, :date)
+    params.require(:event).permit(:text, :date)
   end
 end

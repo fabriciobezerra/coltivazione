@@ -10,6 +10,7 @@ gem 'bootstrap', '~> 4.1.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
 gem 'devise-i18n'
+gem 'draper'
 gem 'font-awesome-rails'
 gem 'geokit-rails'
 gem 'jbuilder', '~> 2.5'
@@ -34,6 +35,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'brakeman'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
