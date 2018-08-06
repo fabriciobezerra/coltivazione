@@ -7,7 +7,7 @@ class HarvestsController < ApplicationController
   before_action -> { validate_user(@harvest) }, only: [:show]
 
   def index
-    @harvests = @farm.harvests
+    @harvests = @farm.harvests.decorate
   end
 
   def show; end
@@ -17,11 +17,10 @@ class HarvestsController < ApplicationController
   end
 
   def create
-    @farm = Farm.find(params[:farm_id])
-    @harvest = @farm.harvests.new(harvest_params)
+    @harvest = @farm.harvests.build(harvest_params)
     @harvest.user = current_user
     if @harvest.save
-      redirect_to @harvest
+      redirect_to harvest_path(@harvest)
     else
       render :new
     end
@@ -30,8 +29,8 @@ class HarvestsController < ApplicationController
   def finish; end
 
   def finished
-    if @harvest.update(harvest_update_params)
-      redirect_to @harvest
+    if @harvest.update(harvest_finish_params)
+      redirect_to harvest_path(@harvest)
     else
       render :finish
     end
@@ -40,14 +39,14 @@ class HarvestsController < ApplicationController
   private
 
   def set_harvest
-    @harvest = Harvest.find(params[:id])
+    @harvest = Harvest.find(params[:id]).decorate
   end
 
   def set_farm
     @farm = Farm.find(params[:farm_id])
   end
 
-  def harvest_update_params
+  def harvest_finish_params
     params.require(:harvest).permit(:final_notes, :state, :total_collected)
   end
 
