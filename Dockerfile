@@ -1,7 +1,7 @@
 FROM ruby:2.5.1-stretch
 MAINTAINER Fabricio Bezerra <demonstro003@gmail.com>
 
-ENV NODE_VERSION 7
+ENV NODE_VERSION 10
 RUN curl -sL https://deb.nodesource.com/setup_$NODE_VERSION.x | bash -
 
 RUN apt-get update -qq
